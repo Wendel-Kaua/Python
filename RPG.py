@@ -66,3 +66,6 @@ while True:
                 vida_maxima += 10
                 print(f"VOCÊ UPOU DE NIVEL AGORA VOCÊ É NÍVEL {nivel}")
             pausar()
+#IMPLEMENTAR SISTEMA DE INIMIGOS COM O RANDOM
+#ATUALMENTE SÓ FUNCIONA ATÉ A OPÇÃO NUMERO 3.
+#TOTAL DE HORAS GASTAS: 1H E 58MIN
