@@ -21,7 +21,7 @@ sair = False
 
 linha()
 print("Bem-vindo ao RPG do Wendel")
-linha
+linha()
 print("\033[1mUM CÓDIGO FEITO POR: WENDEL.\033[0m")
 while True:
     linha()
@@ -58,7 +58,7 @@ while True:
             linha()
             xp += 10
             forca += 1
-            if xp == 50:
+            if xp >= 50:
                 linha()
                 xp = 0
                 nivel += 1
