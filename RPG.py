@@ -1,5 +1,5 @@
 import random
-
+import time
 def linha():
     print("="*64)
 
@@ -18,6 +18,11 @@ xp = 0
 nivel = 1
 pocoes = 3
 sair = False
+#GOBLIN
+vida_goblin = 110
+forca_goblin = 15
+defesa_goblin = 10
+#
 
 linha()
 print("Bem-vindo ao RPG do Wendel")
@@ -66,6 +71,31 @@ while True:
                 vida_maxima += 10
                 print(f"VOCÊ UPOU DE NIVEL AGORA VOCÊ É NÍVEL {nivel}")
             pausar()
+    elif menu == 4:
+        if nome is None:
+            print(" VOCÊ NÃO CRIOU UM PERSONAGEM!")
+            linha()
+        else:
+            valor = random.randint(0, 100)
+            if valor >= 25:
+                print("UM GOBLIN SPAWNOU!")
+                linha()
+                while True:
+                    try:
+                        resposta_lutar = int(input(" DEJESA LUTAR? 1 para SIM e 2 para NÃO: ").strip())
+                    except:
+                        print(" DIGITE UM NÚMERO VÁLIDO!")
+                        linha()
+                        continue
+                    if resposta_lutar == 1:
+                        linha()
+                        print(" CARREGANDO, POR FAVOR AGUARDE...")
+                        time.sleep(1.0)
+                        linha()
+                        print(" BATALHA INICIADA!")
+                        linha()
+                        break
+#TERMINAR SISTEMA DE LUTA          
 #IMPLEMENTAR SISTEMA DE INIMIGOS COM O RANDOM
 #ATUALMENTE SÓ FUNCIONA ATÉ A OPÇÃO NUMERO 3.
-#TOTAL DE HORAS GASTAS: 1H E 58MIN
+#TOTAL DE HORAS GASTAS: 2H E 18MIN
