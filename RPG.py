@@ -138,6 +138,7 @@ while True:
                                     linha()
                                     vida = vida_maxima
                                     xp += 50
+                                    ouro += 25
                                     if xp >= 50:
                                         xp = 0
                                         linha()
