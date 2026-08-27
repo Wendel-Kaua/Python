@@ -7,6 +7,11 @@ def pausar():
     linha()
     input(" Pressione ENTER para voltar ao menu...")
 
+def limpar_tela():
+    print("\033[2J\033[H", end="")
+
+
+
 #Variaveis iniciais
 nome = None
 vida = 100
@@ -18,11 +23,27 @@ xp = 0
 nivel = 1
 pocoes = 3
 sair = False
+batalha_terminou = False
+
+#AREA DE INIMIGOS
+
 #GOBLIN
-vida_goblin = 110
-forca_goblin = 15
-defesa_goblin = 10
-#
+goblin = {"vida_goblin": 80, "forca_goblin": 12, "defesa_goblin": 5}
+#ORC
+orc = {"vida_orc": 120, "forca_orc": 17, "defesa_orc": 8}
+#TROLL
+troll = {"vida_trol": 170, "forca_trol": 22, "defesa_trol": 12}
+#BOSS 1
+boss1 = {"vida_boss1": 250, "forca_boss1": 28, "defesa_boss1": 15}
+
+def mostrar_batalha_goblin():
+    limpar_tela()
+    linha()
+    print("========== BATALHA ==========")
+    linha()
+    print(f" Goblin: {goblin['vida_goblin']}/80")
+    print(f" Você: {vida}/{vida_maxima}")
+    linha()
 
 linha()
 print("Bem-vindo ao RPG do Wendel")
@@ -78,12 +99,13 @@ while True:
         else:
             valor = random.randint(0, 100)
             if valor >= 25:
-                print("UM GOBLIN SPAWNOU!")
+                print(" UM GOBLIN SPAWNOU!")
                 linha()
                 while True:
                     try:
                         resposta_lutar = int(input(" DEJESA LUTAR? 1 para SIM e 2 para NÃO: ").strip())
                     except:
+                        linha()
                         print(" DIGITE UM NÚMERO VÁLIDO!")
                         linha()
                         continue
@@ -94,8 +116,53 @@ while True:
                         linha()
                         print(" BATALHA INICIADA!")
                         linha()
+                        while True:
+                            mostrar_batalha_goblin()
+                            print(" 1- Lutar\n 2- Poção\n 3- Fugir")
+                            linha()
+                            try:
+                                resposta_1 = int(input(" Digite um número: ").strip())
+                            except:
+                                print("DIGITE UM NÚMERO VÁLIDO")
+                                continue
+                            if resposta_1 == 1:
+                                linha()
+                                print(" Você atacou!")
+                                linha()
+                                dano = forca - goblin["defesa_goblin"]
+                                goblin["vida_goblin"] -= dano
+                                print(f" Você deu: {dano} de dano")
+                                if goblin["vida_goblin"] <= 0:
+                                    linha()
+                                    print(" VOCÊ VENCEU!")
+                                    linha()
+                                    vida = vida_maxima
+                                    xp += 50
+                                    if xp >= 50:
+                                        xp = 0
+                                        linha()
+                                        linha()
+                                        nivel += 1
+                                        batalha_terminou = True
+                                    break
+                                time.sleep(1.3)
+                                linha()
+                                print(" Hora do Goblin atacar!")
+                                dano_goblin = goblin["forca_goblin"] - defesa
+                                vida -= dano_goblin
+                                if vida <= 0:
+                                    linha()
+                                    print(" VOCÊ PERDEU AHAHAHAHA!")
+                                    linha()
+                                    ouro -= 10
+                                    vida = vida_maxima
+                                    batalha_terminou = True
+                                    break
+                    if resposta_lutar == 2 or batalha_terminou:
                         break
+
+#TERMINAR OPÇÃO 2 E 3
 #TERMINAR SISTEMA DE LUTA          
 #IMPLEMENTAR SISTEMA DE INIMIGOS COM O RANDOM
 #ATUALMENTE SÓ FUNCIONA ATÉ A OPÇÃO NUMERO 3.
-#TOTAL DE HORAS GASTAS: 2H E 18MIN
+#TOTAL DE HORAS GASTAS: 3H E 18MIN
